@@ -1,10 +1,10 @@
-
-import React, {useEffect} from 'react';
+import React from 'react';
+import Navbar from './Navbar';
 
 const App = () => {
   return (
   <>
-    <h1>title</h1>
+    <Navbar />
   </>
   );
 }
