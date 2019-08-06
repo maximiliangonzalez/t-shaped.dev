@@ -6,13 +6,13 @@ const Dashboard = () => {
   const username = useSelector(store => store.auth.username);
   const following = useSelector(store => store.userInfo.following);
 
-  const cards = following.map(card => <Card />);
+  const followingCards = following.map(card => <Card />);
 
   return (
     username !== '' && (
       <>
         <h1>Welcome {username}!</h1>
-        {cards}
+        {followingCards}
       </>
     )
   );

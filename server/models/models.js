@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const connection = require('../../config');
+const {connection} = require('../../config');
 
 mongoose.connect(connection)
   .catch(err => {throw err});

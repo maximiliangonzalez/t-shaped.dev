@@ -39,6 +39,14 @@ export const login = ({name, password, route}) => dispatch => {
   }
 };
 
-export const logout = () => ({
-  type: types.LOGOUT
-});
+export const logout = () => dispatch => {
+  fetch('/logout', {
+    method: 'POST'
+  })
+  .then(() => {
+    dispatch({
+      type: types.LOGOUT
+    })
+  })
+  .catch(err => console.log(err));
+};
