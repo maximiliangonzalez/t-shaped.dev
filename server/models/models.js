@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   following: {
     type: [
       {
-        topic: String,
+        topic: {type: mongoose.Schema.ObjectId, ref: 'Topic'},
         confidence: Number
       }
     ],
