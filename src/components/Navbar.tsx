@@ -1,6 +1,7 @@
 import React, {useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import {useToken} from '../utils/customHooks';
+import Search from './Search';
 import * as actions from '../actions/actions';
 
 export default () => {
@@ -26,18 +27,21 @@ export default () => {
   };
 
   return (
-    loggedIn ? (
-      <button onClick={logout}>Log Out</button>
-    ) : (
-      <>
-        <input type="text" ref={name}></input>
-        <input type="password" ref={password}></input>
-        <button onClick={signup}>Sign Up</button>
-        <button onClick={login}>Log In</button>
-        {
-          message !== '' && message
-        }
-      </>
-    )
+    <>
+      <Search />
+      {loggedIn ? (
+        <button onClick={logout}>Log Out</button>
+      ) : (
+        <>
+          <input type="text" ref={name}></input>
+          <input type="password" ref={password}></input>
+          <button onClick={signup}>Sign Up</button>
+          <button onClick={login}>Log In</button>
+          {
+            message !== '' && message
+          }
+        </>
+      )}
+    </>
   );
 };
