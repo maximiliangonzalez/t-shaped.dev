@@ -17,6 +17,10 @@ app.post('/login', login, signToken, (req, res) => {
   res.status(200).json(res.locals.user);
 });
 
+app.post('/verifyAndLogin', checkToken, login, (req, res) => {
+  res.status(200).json(res.locals.user);
+});
+
 app.post('/verify', checkToken, (req, res) => {
   res.status(200).json(res.locals.token);
 });

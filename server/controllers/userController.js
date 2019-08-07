@@ -22,7 +22,14 @@ module.exports = {
   },
 
   login(req, res, next) {
-    const {name, password} = req.body;
+    let {name, password} = req.body;
+    // login() is used as middleware in different locations
+    // if there is a token property on res.locals, we want to take namd and password from there instead
+    if (res.locals.token) {
+      name = res.locals.token.username;
+      password = res.locals.password;
+    }
+
     User.findOne({name}, (err, user) => {
       if (err) {
         return next(err);
@@ -30,6 +37,7 @@ module.exports = {
       if (!user || user.password !== password) {
         return next('incorrect credentials');
       }
+
       res.locals.user = user;
       return next();
     });

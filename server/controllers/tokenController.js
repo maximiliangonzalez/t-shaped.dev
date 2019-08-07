@@ -23,7 +23,7 @@ module.exports = {
         if (!user) {
           return next('no user found');
         }
-        res.locals.token.password = user.password
+        res.locals.password = user.password
         return next();
       });
     });

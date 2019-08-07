@@ -39,6 +39,32 @@ export const login = ({name, password, route}) => dispatch => {
   }
 };
 
+export const verifyAndLogin = () => dispatch => {
+  const toDispatch = {
+    type: types.LOGIN,
+    payload: {
+      loggedIn: false,
+      username: '',
+      message: ''
+    }
+  };
+
+  fetch('/verifyAndLogin', {
+    method: 'POST'
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.hasOwnProperty('msg')) {
+      toDispatch.payload.message = data.msg;
+    } else {
+      toDispatch.payload.loggedIn = true;
+      toDispatch.payload.username = data.name;
+    }
+    dispatch(toDispatch);
+  })
+  .catch(err => console.log(err));
+}
+
 export const logout = () => dispatch => {
   fetch('/logout', {
     method: 'POST'
