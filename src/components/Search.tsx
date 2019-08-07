@@ -5,7 +5,7 @@ const Search = () => {
 
   return (
     <> 
-      <input type="text" ref={search}/>
+      <input type="text" placeholder="search" ref={search}/>
     </>
   )
 };

@@ -33,8 +33,8 @@ export default () => {
         <button onClick={logout}>Log Out</button>
       ) : (
         <>
-          <input type="text" ref={name}></input>
-          <input type="password" ref={password}></input>
+          <input type="text" placeholder="username" ref={name}></input>
+          <input type="password" placeholder="password" ref={password}></input>
           <button onClick={signup}>Sign Up</button>
           <button onClick={login}>Log In</button>
           {
