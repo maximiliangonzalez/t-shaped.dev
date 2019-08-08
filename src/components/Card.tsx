@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = () => {
+const Card = ({}) => {
   return (
     <>
       
