@@ -1,16 +1,16 @@
 import * as types from './constants';
 
-export const login = ({name, password, route}) => dispatch => {
+export const login = (name, password, route) => dispatch => {
   const toDispatch = {
     type: types.LOGIN,
     payload: {
       loggedIn: false,
       username: '',
-      message: '',
-      route
+      message: ''
     }
   };
 
+  // if the user information is incomplete, we don't bother making a fetch request
   if (name.length > 0 && password.length > 0) {
     fetch(route, {
       method: 'POST',
@@ -25,6 +25,9 @@ export const login = ({name, password, route}) => dispatch => {
     .then(res => res.json())
     .then(data => {
       if (data.hasOwnProperty('msg')) {
+        // data should only have a msg property if there was an error logging in
+        // if so, we only change the msg property and then dispatch the action creator
+        // this will leave the user logged out, but show them why they couldn't log in
         toDispatch.payload.message = data.msg;
       } else {
         toDispatch.payload.loggedIn = true;

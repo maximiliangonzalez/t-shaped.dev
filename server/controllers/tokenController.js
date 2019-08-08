@@ -15,14 +15,15 @@ module.exports = {
         return next(err);
       }
       
-      res.locals.token = decodedToken;
-      User.findOne({name: res.locals.token.username}, (err, user) => {
+      User.findOne({name: decodedToken.username}, (err, user) => {
         if (err) {
           return next(err);
         }
         if (!user) {
           return next('no user found');
         }
+        // we add the password to res.locals so the login() middleware can log a user in as usual if they have a valid token
+        res.locals.token = decodedToken;
         res.locals.password = user.password
         return next();
       });
@@ -30,6 +31,7 @@ module.exports = {
   },
 
   signToken(req, res, next) {
+    // we sign a jwt and send it back to the client as a cookie if a user successfully logs in or signs in
     let token = jwt.sign({username: res.locals.user.name}, secret);
     res.cookie('token', `Bearer ${token}`);
     next();

@@ -24,7 +24,9 @@ module.exports = {
   login(req, res, next) {
     let {name, password} = req.body;
     // login() is used as middleware in different locations
-    // if there is a token property on res.locals, we want to take namd and password from there instead
+    // if there is a token property on res.locals, this means the previous middleware was checkToken()
+    // this means that we're logging the user in automatically because they have a valid JWT
+    // in that case, we want to take the information from the previous middleware rather than from the request body
     if (res.locals.token) {
       name = res.locals.token.username;
       password = res.locals.password;

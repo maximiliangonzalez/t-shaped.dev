@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {connection} = require('../../config');
 
 mongoose.connect(connection)
-  .catch(err => {throw err});
+  .catch(err => console.log(err));
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
 });
 
 const topicSchema = new mongoose.Schema({
+  name: String,
+  tags: [{
+    type: String
+  }],
   questions: {
     type: [
       {

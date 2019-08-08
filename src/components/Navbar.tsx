@@ -1,6 +1,5 @@
 import React, {useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
-import {useToken} from '../utils/customHooks';
 import Search from './Search';
 import * as actions from '../actions/actions';
 
@@ -11,15 +10,12 @@ export default () => {
   const name = useRef(null);
   const password = useRef(null);
 
-  // custom hook that will log a user in if they have a cookie with a valid JWT incidating they have an active session
-  useToken();
-
   const signup = () => {
-    dispatch(actions.login({name: name.current.value, password: password.current.value, route: '/signup'}));
+    dispatch(actions.login(name.current.value, password.current.value, '/signup'));
   };
 
   const login = () => {
-    dispatch(actions.login({name: name.current.value, password: password.current.value, route: '/login'}));
+    dispatch(actions.login(name.current.value, password.current.value, '/login'));
   };
 
   const logout = () => {
