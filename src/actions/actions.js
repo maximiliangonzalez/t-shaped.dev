@@ -1,5 +1,10 @@
 import * as types from './constants';
 
+const populateFollowing = following => ({
+  type: types.POPULATE_FOLLOWING,
+  payload: following
+});
+
 export const login = (name, password, route) => dispatch => {
   const toDispatch = {
     type: types.LOGIN,
@@ -24,6 +29,7 @@ export const login = (name, password, route) => dispatch => {
     })
     .then(res => res.json())
     .then(data => {
+      console.log(data);
       if (data.hasOwnProperty('msg')) {
         // data should only have a msg property if there was an error logging in
         // if so, we only change the msg property and then dispatch the action creator
@@ -32,6 +38,7 @@ export const login = (name, password, route) => dispatch => {
       } else {
         toDispatch.payload.loggedIn = true;
         toDispatch.payload.username = data.name;
+        dispatch(populateFollowing(data.following));
       }
       dispatch(toDispatch);
     })
@@ -62,6 +69,7 @@ export const verifyAndLogin = () => dispatch => {
     } else {
       toDispatch.payload.loggedIn = true;
       toDispatch.payload.username = data.name;
+      dispatch(populateFollowing(data.following));
     }
     dispatch(toDispatch);
   })
