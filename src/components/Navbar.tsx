@@ -5,9 +5,8 @@ import {ReduxStore} from '../utils/interfaces';
 import Search from './Search';
 import AddTopic from './AddTopic';
 
-const Navbar: React.FC = (): JSX.Element => {
+const Navbar: React.FC<{loggedIn: boolean}> = ({loggedIn}): JSX.Element => {
   const dispatch = useDispatch();
-  const loggedIn = useSelector((store : ReduxStore) => store.auth.loggedIn);
   const message = useSelector((store : ReduxStore) => store.auth.message);
   const name = useRef(null);
   const password = useRef(null);
@@ -26,10 +25,12 @@ const Navbar: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <Search />
-      <AddTopic />
       {loggedIn ? (
-        <button onClick={logout}>Log Out</button>
+        <>
+          <Search />
+          <AddTopic />
+          <button onClick={logout}>Log Out</button>
+        </>
       ) : (
         <>
           <input type="text" placeholder="username" ref={name}></input>

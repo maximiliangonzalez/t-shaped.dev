@@ -1,9 +1,16 @@
 import * as types from './constants';
 
+// this is not esxported as it is only dispatched upon login
 const populateFollowing = following => ({
   type: types.POPULATE_FOLLOWING,
   payload: following
 });
+
+export const addTopic = (topicName, tags) => dispatch => {
+  // add topic to database
+  // add topic to currently logged in user's following list in database
+  // add topic to currently logged in user's following list in redux store
+};
 
 export const login = (name, password, route) => dispatch => {
   const toDispatch = {
@@ -29,7 +36,6 @@ export const login = (name, password, route) => dispatch => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       if (data.hasOwnProperty('msg')) {
         // data should only have a msg property if there was an error logging in
         // if so, we only change the msg property and then dispatch the action creator
