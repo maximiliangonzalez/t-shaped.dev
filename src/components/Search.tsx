@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 
-const Search = () => {
+const Search: React.FC = (): JSX.Element => {
   const search = useRef(null);
 
   return (

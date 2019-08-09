@@ -2,11 +2,12 @@ import React, {useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import Search from './Search';
 import * as actions from '../actions/actions';
+import {ReduxStore} from '../utils/interfaces';
 
-export default () => {
+const Navbar: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
-  const loggedIn = useSelector(store => store.auth.loggedIn);
-  const message = useSelector(store => store.auth.message);
+  const loggedIn = useSelector((store : ReduxStore) => store.auth.loggedIn);
+  const message = useSelector((store : ReduxStore) => store.auth.message);
   const name = useRef(null);
   const password = useRef(null);
 
@@ -41,3 +42,5 @@ export default () => {
     </>
   );
 };
+
+export default Navbar;

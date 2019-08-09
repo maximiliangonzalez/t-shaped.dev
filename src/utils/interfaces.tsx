@@ -1,3 +1,14 @@
+export interface ReduxStore {
+  auth: {
+    loggedIn: boolean,
+    username: string,
+    message: string
+  };
+  userInfo: {
+    following: topic[]
+  };
+}
+
 export interface topic {
   questions: question[];
 }
@@ -24,3 +35,4 @@ interface user {
   password: string;
   following: topic[];
 }
+

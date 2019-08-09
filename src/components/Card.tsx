@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const Card = ({}) => {
+const Card: React.FC = (): JSX.Element => {
+  // all cards will have a 'card' class
+  // gray ones will also have 'card-gray' and green ones 'card-green'
+  const classnames: string[] = ['card'];
+
   return (
-    <div className="card card-not-confident">
+    <div className={classnames.join(' ')}>
       
     </div>
   )

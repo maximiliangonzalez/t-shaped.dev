@@ -1,12 +1,13 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import Card from './Card';
+import {ReduxStore, topic} from '../utils/interfaces'
 
-const Dashboard = () => {
-  const username = useSelector(store => store.auth.username);
-  const following = useSelector(store => store.userInfo.following);
+const Dashboard: React.FC = (): JSX.Element => {
+  const username: string = useSelector((store : ReduxStore) => store.auth.username);
+  const following: topic[] = useSelector((store : ReduxStore) => store.userInfo.following);
 
-  const followingCards = following.map(({}) => <Card />);
+  const followingCards: JSX.Element[] = following.map(card => <Card />); // why can't i assign React.FC[] ???
 
   return (
     username !== '' && (
