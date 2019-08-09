@@ -6,10 +6,23 @@ const populateFollowing = following => ({
   payload: following
 });
 
-export const addTopic = (topicName, tags) => dispatch => {
+export const addTopic = (topicName, tags, username) => dispatch => {
   // add topic to database
   // add topic to currently logged in user's following list in database
   // add topic to currently logged in user's following list in redux store
+  fetch('/followTopic', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      topicName, tags, username
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+
+  });
 };
 
 export const login = (name, password, route) => dispatch => {

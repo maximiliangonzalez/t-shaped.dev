@@ -1,4 +1,4 @@
-const {User} = require('../models/models');
+const {User, Topic} = require('../models/models');
 
 module.exports = {
   signup(req, res, next) {
@@ -42,6 +42,28 @@ module.exports = {
 
       res.locals.user = user;
       return next();
+    });
+  },
+
+  addTopic(req, res, next) {
+    const {topicName, tags} = req.body;
+    Topic.create({topicName, tags}, (err, topic) => {
+      if (err) {
+        return next(err);
+      }
+      if (!topic) {
+        return next('nothing created');
+      }
+      res.locals.topic = topic;
+      next();
+    });
+  },
+
+  followTopic(req, res, next) {
+    User.findOneAndUpdate({name: req.body.username},
+      {$push: {following: res.locals.topic}},
+      (err, user) => {
+        //losing track of everything i'm doing rn lol
     });
   }
 };
