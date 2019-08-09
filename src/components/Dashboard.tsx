@@ -7,7 +7,9 @@ const Dashboard: React.FC<{loggedIn: boolean}> = ({loggedIn}): JSX.Element => {
   const username: string = useSelector((store : ReduxStore) => store.auth.username);
   const following: topic[] = useSelector((store : ReduxStore) => store.userInfo.following);
 
-  const followingCards: JSX.Element[] = following.map(card => <Card />);
+const followingCards: JSX.Element[] = following.map(({name, tags, questions}: topic) => {
+  return <Card name={name} tags={tags} questions={questions}/>
+});
 
   return (
     loggedIn && (

@@ -10,16 +10,18 @@ export interface ReduxStore {
 }
 
 export interface topic {
+  name: string;
+  tags: string[];
   questions: question[];
 }
 
-interface question {
+export interface question {
   contributor: user;
   text: string;
   answers: answer[];
 }
 
-interface answer {
+export interface answer {
   contributor: user;
   text: string;
   replies: reply[];

@@ -10,6 +10,7 @@ const App: React.FC = (): JSX.Element => {
   // if there is a valid token, the user will be logged in automatically
   // if not, the user will have to log in to view their information
   useToken();
+  
   const loggedIn = useSelector((store : ReduxStore) => store.auth.loggedIn);
   
   return (
