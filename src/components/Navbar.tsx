@@ -1,8 +1,9 @@
 import React, {useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
-import Search from './Search';
 import * as actions from '../actions/actions';
 import {ReduxStore} from '../utils/interfaces';
+import Search from './Search';
+import AddTopic from './AddTopic';
 
 const Navbar: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Navbar: React.FC = (): JSX.Element => {
   return (
     <>
       <Search />
+      <AddTopic />
       {loggedIn ? (
         <button onClick={logout}>Log Out</button>
       ) : (

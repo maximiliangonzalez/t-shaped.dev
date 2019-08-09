@@ -7,7 +7,7 @@ const Dashboard: React.FC = (): JSX.Element => {
   const username: string = useSelector((store : ReduxStore) => store.auth.username);
   const following: topic[] = useSelector((store : ReduxStore) => store.userInfo.following);
 
-  const followingCards: JSX.Element[] = following.map(card => <Card />); // why can't i assign React.FC[] ???
+  const followingCards: JSX.Element[] = following.map(card => <Card />);
 
   return (
     username !== '' && (
