@@ -1,16 +1,13 @@
 import * as types from './constants';
 
-// this is not esxported as it is only dispatched upon login
+// this is not exported as it is only dispatched upon login
 const populateFollowing = following => ({
   type: types.POPULATE_FOLLOWING,
   payload: following
 });
 
 export const addTopic = (topicName, tags, username) => dispatch => {
-  // add topic to database
-  // add topic to currently logged in user's following list in database
-  // add topic to currently logged in user's following list in redux store
-  fetch('/followTopic', {
+  fetch('/addTopic', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -21,8 +18,14 @@ export const addTopic = (topicName, tags, username) => dispatch => {
   })
   .then(res => res.json())
   .then(data => {
-
-  });
+    if (!data.hasOwnProperty('msg')) {
+      dispatch({
+        type: types.ADD_TOPIC,
+        payload: topicName
+      })
+    }
+  })
+  .catch(err => console.log(err));
 };
 
 export const login = (name, password, route) => dispatch => {
@@ -55,6 +58,7 @@ export const login = (name, password, route) => dispatch => {
         // this will leave the user logged out, but show them why they couldn't log in
         toDispatch.payload.message = data.msg;
       } else {
+        console.log('following', data.following)
         toDispatch.payload.loggedIn = true;
         toDispatch.payload.username = data.name;
         dispatch(populateFollowing(data.following));
@@ -86,6 +90,7 @@ export const verifyAndLogin = () => dispatch => {
     if (data.hasOwnProperty('msg')) {
       toDispatch.payload.message = data.msg;
     } else {
+      console.log('following', data.following)
       toDispatch.payload.loggedIn = true;
       toDispatch.payload.username = data.name;
       dispatch(populateFollowing(data.following));

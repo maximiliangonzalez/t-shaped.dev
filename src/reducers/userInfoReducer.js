@@ -1,5 +1,5 @@
 import * as types from '../actions/constants';
-import {populateFollowing, followTopic} from '../utils/userInfoReducer.util';
+import {populateFollowing, addTopic} from '../utils/userInfoReducer.util';
 
 const initialState = {
   following: []
@@ -10,7 +10,8 @@ const userInfoReducer = (state = initialState, action) => {
     case types.POPULATE_FOLLOWING:
       return populateFollowing(state, action.payload);
     case types.ADD_TOPIC:
-      return followTopic(state, action.payload);
+      console.log(action);
+      return addTopic(state, action.payload);
     default:
       return state;
   }

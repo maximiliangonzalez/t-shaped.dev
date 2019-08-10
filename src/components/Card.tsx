@@ -7,11 +7,12 @@ const Card: React.FC<topic> = ({name, tags, questions}): JSX.Element => {
   const classnames: string[] = ['card'];
 
   // refactor this into separate components
+  // might have to make a fetch request per card
   const questionList: JSX.Element[] = questions.map((question: question) => {
-    const answers = question.answers.map((answer: answer) => <li className="answer">answer.text</li>);
+    // const answers = question.answers.map((answer: answer) => <li className="answer">answer.text</li>);
     return <div className="question">
             <h2>question.text</h2>
-            {answers}
+            {/* {answers} */}
             <button>Add answer</button>
           </div>
   });

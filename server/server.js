@@ -29,7 +29,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/addTopic', checkToken, addTopic, followTopic, (req, res) => {
-  res.status(200).send();
+  res.status(200).json(res.locals.user);
 });
 
 app.use((err, req, res, next) => {

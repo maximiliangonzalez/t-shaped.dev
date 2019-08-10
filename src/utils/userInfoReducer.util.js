@@ -3,6 +3,7 @@ export const populateFollowing = (state, payload) => ({
   following: payload
 });
 
-export const followTopic = () => ({
-
+export const addTopic = (state, topicName) => ({
+  ...state,
+  following: [...state.following, topicName]
 });
