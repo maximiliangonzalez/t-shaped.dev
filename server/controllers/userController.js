@@ -71,7 +71,6 @@ module.exports = {
         if (!user) {
           return next('user not found');
         }
-        res.locals.user = user;
         return next();
     });
   },

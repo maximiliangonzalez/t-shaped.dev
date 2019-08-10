@@ -21,7 +21,7 @@ export const addTopic = (topicName, tags, username) => dispatch => {
     if (!data.hasOwnProperty('msg')) {
       dispatch({
         type: types.ADD_TOPIC,
-        payload: topicName
+        payload: {_id: data}
       })
     }
   })
