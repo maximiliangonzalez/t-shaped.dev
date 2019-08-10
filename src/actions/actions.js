@@ -58,7 +58,6 @@ export const login = (name, password, route) => dispatch => {
         // this will leave the user logged out, but show them why they couldn't log in
         toDispatch.payload.message = data.msg;
       } else {
-        console.log('following', data.following)
         toDispatch.payload.loggedIn = true;
         toDispatch.payload.username = data.name;
         dispatch(populateFollowing(data.following));

@@ -77,7 +77,6 @@ module.exports = {
   },
 
   topicName(req, res, next) {
-    console.log('id', req.headers.id)
     Topic.findOne({_id: req.headers.id}, (err, topic) => {
       if (err) {
         return next(err);
@@ -85,7 +84,6 @@ module.exports = {
       if (!topic) {
         return next('no topic found');
       }
-      console.log(topic);
       res.locals.topic = topic.name;
       return next();
     })
