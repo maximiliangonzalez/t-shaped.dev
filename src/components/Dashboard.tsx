@@ -1,17 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import Card from './Card';
-import {ReduxStore, topic} from '../utils/interfaces'
+import {ReduxStore} from '../utils/interfaces'
 
 const Dashboard: React.FC<{loggedIn: boolean}> = ({loggedIn}): JSX.Element => {
   const username: string = useSelector((store : ReduxStore) => store.auth.username);
-  const following: topic[] = useSelector((store : ReduxStore) => store.userInfo.following);
-  console.log(following, 'following')
+  const following: Object[] = useSelector((store : ReduxStore) => store.userInfo.following);
+  const [followingCards, setFollowingCards] = useState([]);
 
-  const followingCards: JSX.Element[] = following.map((name: topic) => {
-    // return <Card name={name} tags={tags} questions={questions}/>
-    return <div>x{JSON.stringify(name)}x</div>
-  });
+  useEffect(() => {
+    setFollowingCards(following.map((card: {_id: string}) => {
+      return <Card key={card._id} id={card._id} />
+    }));
+  }, [following])
 
   return (
     loggedIn && (

@@ -10,7 +10,6 @@ const userInfoReducer = (state = initialState, action) => {
     case types.POPULATE_FOLLOWING:
       return populateFollowing(state, action.payload);
     case types.ADD_TOPIC:
-      console.log(action);
       return addTopic(state, action.payload);
     default:
       return state;

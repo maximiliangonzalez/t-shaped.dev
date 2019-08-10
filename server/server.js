@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const path = require('path');
-const {signup, login, addTopic, followTopic} = require('./controllers/userController');
+const {signup, login, addTopic, followTopic, topicName} = require('./controllers/userController');
 const {signToken, checkToken} = require('./controllers/tokenController');
 
 const app = express();
@@ -30,6 +29,10 @@ app.post('/logout', (req, res) => {
 
 app.post('/addTopic', checkToken, addTopic, followTopic, (req, res) => {
   res.status(200).json(res.locals.user);
+});
+
+app.get('/topicName', topicName, (req, res) => {
+  res.status(200).json(res.locals.topic);
 });
 
 app.use((err, req, res, next) => {

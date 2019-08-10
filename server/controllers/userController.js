@@ -46,9 +46,7 @@ module.exports = {
   },
 
   addTopic(req, res, next) {
-    console.log('adding topic');
     const {topicName, tags} = req.body;
-    console.log({topicName, tags})
     Topic.create({name: topicName, tags}, (err, topic) => {
       if (err) {
         return next(err);
@@ -56,14 +54,12 @@ module.exports = {
       if (!topic) {
         return next('nothing created');
       }
-      console.log(topic);
       res.locals.topic = topic;
       next();
     });
   },
 
   followTopic(req, res, next) {
-    console.log('follow topic');
     User.findOneAndUpdate(
       {name: req.body.username},
       {$push: {following: res.locals.topic}},
@@ -78,5 +74,20 @@ module.exports = {
         res.locals.user = user;
         return next();
     });
+  },
+
+  topicName(req, res, next) {
+    console.log('id', req.headers.id)
+    Topic.findOne({_id: req.headers.id}, (err, topic) => {
+      if (err) {
+        return next(err);
+      }
+      if (!topic) {
+        return next('no topic found');
+      }
+      console.log(topic);
+      res.locals.topic = topic.name;
+      return next();
+    })
   }
 };

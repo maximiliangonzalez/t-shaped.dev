@@ -90,7 +90,6 @@ export const verifyAndLogin = () => dispatch => {
     if (data.hasOwnProperty('msg')) {
       toDispatch.payload.message = data.msg;
     } else {
-      console.log('following', data.following)
       toDispatch.payload.loggedIn = true;
       toDispatch.payload.username = data.name;
       dispatch(populateFollowing(data.following));
