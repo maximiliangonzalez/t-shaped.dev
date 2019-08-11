@@ -21,7 +21,7 @@ const Card: React.FC<{id}> = ({id}): JSX.Element => {
 
   // all cards will have a 'card' class
   // gray ones will also have 'card-gray' and green ones 'card-green'
-  const classnames: string[] = ['card'];
+  const [color, setColor] = useState('card-gray');
 
   // refactor this into separate components
   // might have to make a fetch request per card
@@ -35,7 +35,7 @@ const Card: React.FC<{id}> = ({id}): JSX.Element => {
   // });
 
   return (
-    <div className={classnames.join(' ')}>
+    <div className={`card ${color}`}>
       <h1>{name}</h1>
       {/* {questionList} */}
       {/* <button>Add question</button> */}
