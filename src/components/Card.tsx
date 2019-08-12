@@ -23,6 +23,14 @@ const Card: React.FC<{id}> = ({id}): JSX.Element => {
   // gray ones will also have 'card-gray' and green ones 'card-green'
   const [color, setColor] = useState('card-gray');
 
+  const changeColor = () => {
+    if (color === 'card-gray') {
+      setColor('card-green');
+    } else {
+      setColor('card-gray');
+    }
+  };
+
   // refactor this into separate components
   // might have to make a fetch request per card
   // const questionList: JSX.Element[] = questions.map((question: question) => {
@@ -37,6 +45,7 @@ const Card: React.FC<{id}> = ({id}): JSX.Element => {
   return (
     <div className={`card ${color}`}>
       <h1>{name}</h1>
+      <button onClick={changeColor}>✔</button>
       {/* {questionList} */}
       {/* <button>Add question</button> */}
     </div>
