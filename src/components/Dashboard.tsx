@@ -15,7 +15,9 @@ const Dashboard: React.FC<{loggedIn: boolean}> = ({loggedIn}): JSX.Element => {
     loggedIn && (
       <>
         <h1>Welcome {username}!</h1>
-        {followingCards}
+        <div className="container">
+          {followingCards}
+        </div>
       </>
     )
   );
