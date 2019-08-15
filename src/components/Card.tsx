@@ -45,7 +45,9 @@ const Card: React.FC<{id}> = ({id}): JSX.Element => {
   return (
     <div className={`card ${color}`}>
       <h1>{name}</h1>
-      <button onClick={changeColor}>✔</button>
+      <button onClick={changeColor} className="checkButton">
+        {color === 'card-gray' ? '✔' : 'X'}
+      </button>
       {/* {questionList} */}
       {/* <button>Add question</button> */}
     </div>
