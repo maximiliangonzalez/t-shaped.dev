@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     type: [
       {
         topic: {type: mongoose.Schema.ObjectId, ref: 'Topic'},
-        confidence: Number
+        confidence: {type: Boolean, default: false}
       }
     ],
     default: []
