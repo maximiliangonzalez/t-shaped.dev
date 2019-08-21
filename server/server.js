@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const {signup, login, addTopic, followTopic, topicName} = require('./controllers/userController');
+const {signup, login, searchTopic, addTopic, followTopic, topicName} = require('./controllers/userController');
 const {signToken, checkToken} = require('./controllers/tokenController');
 
 const app = express();
@@ -25,6 +25,10 @@ app.post('/logout', (req, res) => {
   // find a way to do this without accessing the server
   // does the token cookie need to be httpOnly?
   res.clearCookie('token').send();
+});
+
+app.get('/searchTopic/:topic', searchTopic, (req, res) => {
+  res.status(200).json(res.locals.topic);
 });
 
 app.post('/addTopic', checkToken, addTopic, followTopic, (req, res) => {

@@ -45,6 +45,12 @@ module.exports = {
     });
   },
 
+  searchTopic(req, res, next) {
+    console.log(req.params.topic);
+    res.locals.topic = req.params.topic;
+    return next();
+  },
+
   addTopic(req, res, next) {
     const {topicName, tags} = req.body;
     Topic.create({name: topicName, tags}, (err, topic) => {
@@ -55,7 +61,7 @@ module.exports = {
         return next('nothing created');
       }
       res.locals.topic = topic;
-      next();
+      return next();
     });
   },
 
