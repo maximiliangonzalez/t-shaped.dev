@@ -9,11 +9,15 @@ const AddTopic = () => {
   const username = useSelector((store: ReduxStore) => store.auth.username);
   const dispatch = useDispatch();
 
-  const addTopic = () => dispatch(actions.addTopic(topicName.current.value, tags.current.value.split(','), username));
+  const addTopic = () => {
+    if (topicName.current.value.trim() !== '') {
+      dispatch(actions.addTopic(topicName.current.value, tags.current.value.split(','), username))
+    }
+  };
 
   return (
     <>
-      <input type="text" placeholder="topic name" ref={topicName} />
+      <input type="text" placeholder="add new topic" ref={topicName} />
       <input type="text" placeholder="tags (comma separated)" ref={tags} />
       <button onClick={addTopic}>Add topic</button>
     </>

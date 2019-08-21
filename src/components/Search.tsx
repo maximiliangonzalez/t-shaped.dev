@@ -1,16 +1,12 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState} from 'react';
+import SearchResult from './SearchResult';
 
 const Search: React.FC = (): JSX.Element => {
   const searchTerm = useRef(null);
+  const [focused, setFocused] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
-  const searchList = searchResults.map(result => {
-    return (
-      <li key={result._id} id={result._id}>
-        {result.name}
-      </li>
-    );
-  });
+  const searchList = searchResults.map(({_id, name}) => <SearchResult key={_id} id={_id} name={name}/>);
 
   const search = () => {
     const term = searchTerm.current.value;
@@ -18,7 +14,6 @@ const Search: React.FC = (): JSX.Element => {
       fetch(`/searchTopic/${term}`)
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           setSearchResults(data);
         })
         .catch(err => console.log(err));
@@ -27,23 +22,21 @@ const Search: React.FC = (): JSX.Element => {
     }
   };
 
-  const hideSearch = () => {
+  const onBlur = () => setFocused(false);
 
-  };
-
-  const showSearch = () => {
-
-  };
+  const onFocus = () => setFocused(true);
 
   return (
-    <div> 
-      <input type="text" placeholder="search" ref={searchTerm} onChange={search} onBlur={hideSearch} onFocus={showSearch} />
-      {searchResults.length > 0 && 
-        <ul>
-          {searchList}
-        </ul>
+    <> 
+      <input type="text" placeholder="search" ref={searchTerm} onChange={search} onBlur={onBlur} onFocus={onFocus}/>
+      {searchResults.length > 0 && focused && 
+        <div className="dropdown">
+          <ul className="dropdown-content">
+            {searchList}
+          </ul>
+        </div>
       }
-    </div>
+    </>
   )
 };
 
