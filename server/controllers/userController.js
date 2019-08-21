@@ -46,16 +46,21 @@ module.exports = {
   },
 
   searchTopic(req, res, next) {
-    console.log(req.params.topic);
-    res.locals.topic = req.params.topic;
-    return next();
+    // finds topics starting with the request parameter
+    Topic.find({name: new RegExp(`^${req.params.topic}`, 'i')}, (err, topic) => {
+      if (err) {
+        return next(err);
+      }
+      res.locals.topics = topic? topic : [];
+      return next();
+    });
   },
 
   addTopic(req, res, next) {
     const {topicName, tags} = req.body;
     Topic.create({name: topicName, tags}, (err, topic) => {
       if (err) {
-        return next(err);
+        return next('err');
       }
       if (!topic) {
         return next('nothing created');

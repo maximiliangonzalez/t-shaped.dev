@@ -24,7 +24,7 @@ const Navbar: React.FC<{loggedIn: boolean}> = ({loggedIn}): JSX.Element => {
   };
 
   return (
-    <>
+    <nav>
       {loggedIn ? (
         <>
           <Search />
@@ -42,7 +42,7 @@ const Navbar: React.FC<{loggedIn: boolean}> = ({loggedIn}): JSX.Element => {
           }
         </>
       )}
-    </>
+    </nav>
   );
 };
 

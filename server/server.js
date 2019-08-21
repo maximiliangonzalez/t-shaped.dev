@@ -28,7 +28,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.get('/searchTopic/:topic', searchTopic, (req, res) => {
-  res.status(200).json(res.locals.topic);
+  res.status(200).json(res.locals.topics);
 });
 
 app.post('/addTopic', checkToken, addTopic, followTopic, (req, res) => {
