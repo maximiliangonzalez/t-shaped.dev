@@ -28,6 +28,17 @@ export const addTopic = (topicName, tags, username) => dispatch => {
   .catch(err => console.log(err));
 };
 
+export const followTopic = topic => dispatch => {
+  fetch('/followTopic', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({topic})
+  })
+  .catch(err => console.log(err));
+};
+
 export const login = (name, password, route) => dispatch => {
   const toDispatch = {
     type: types.LOGIN,

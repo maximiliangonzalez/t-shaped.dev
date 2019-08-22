@@ -35,6 +35,10 @@ app.post('/addTopic', checkToken, addTopic, followTopic, (req, res) => {
   res.status(200).json(res.locals.topic._id);
 });
 
+app.post('/followTopic', followTopic, (req, res) => {
+  res.status(200).json(resl.locals.topic._id);
+});
+
 app.get('/topicName', topicName, (req, res) => {
   res.status(200).json(res.locals.topic);
 });

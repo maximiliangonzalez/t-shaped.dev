@@ -11,7 +11,7 @@ const AddTopic = () => {
 
   const addTopic = () => {
     if (topicName.current.value.trim() !== '') {
-      dispatch(actions.addTopic(topicName.current.value, tags.current.value.split(','), username))
+      dispatch(actions.addTopic(topicName.current.value, tags.current.value.split(','), username));
     }
   };
 
