@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const {signup, login, searchTopic, addTopic, followTopic, topicName} = require('./controllers/userController');
+const {signup, login, searchTopic, addTopic, followTopic, topicName, findTopic} = require('./controllers/userController');
 const {signToken, checkToken} = require('./controllers/tokenController');
 
 const app = express();
@@ -35,8 +35,8 @@ app.post('/addTopic', checkToken, addTopic, followTopic, (req, res) => {
   res.status(200).json(res.locals.topic._id);
 });
 
-app.post('/followTopic', followTopic, (req, res) => {
-  res.status(200).json(resl.locals.topic._id);
+app.post('/followTopic', checkToken, findTopic, followTopic, (req, res) => {
+  res.status(200).json(res.locals.topic._id);
 });
 
 app.get('/topicName', topicName, (req, res) => {

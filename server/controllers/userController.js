@@ -70,12 +70,20 @@ module.exports = {
     });
   },
 
+  findTopic(req, res, next) {
+    Topic.findOne({_id: req.body.topic}, (err, topic) => {
+      if (err) {
+        return next(err);
+      }
+      if (!topic) {
+        return next('topic not found');
+      }
+      res.locals.topic = topic;
+      return next();
+    });
+  },
+
   followTopic(req, res, next) {
-    if (req.body.topic && !res.locals.topic) {
-      res.locals.topic = {_id: req.body.topic}
-    }
-    // user's following array is not being updated with new topic
-    // split into findTopic middleware first? see if whole topic info is actually required
     User.findOneAndUpdate(
       {name: req.body.username},
       {$push: {following: res.locals.topic}},
@@ -87,6 +95,7 @@ module.exports = {
         if (!user) {
           return next('user not found');
         }
+        console.log('tawpic', res.locals.topic);
         return next();
     });
   },
