@@ -7,13 +7,13 @@ const populateFollowing = following => ({
 });
 
 export const addTopic = (topicName, tags, username) => dispatch => {
-  fetch('/addTopic', {
+  fetch(`/topic/${topicName}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      topicName, tags, username
+      tags, username
     })
   })
   .then(res => res.json())
@@ -31,12 +31,12 @@ export const addTopic = (topicName, tags, username) => dispatch => {
 
 export const followTopic = (topic, username) => dispatch => {
   console.log('following>')
-  fetch('/followTopic', {
+  fetch(`/topic/follow/${topic}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({topic, username})
+    body: JSON.stringify({username})
   })
   .then(res => res.json())
   .then(data => {
@@ -64,7 +64,7 @@ export const login = (name, password, route) => dispatch => {
 
   // if the user information is incomplete, we don't bother making a fetch request
   if (name.length > 0 && password.length > 0) {
-    fetch(route, {
+    fetch(`/user${route}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ export const verifyAndLogin = () => dispatch => {
     }
   };
 
-  fetch('/verifyAndLogin', {
+  fetch('/user/verifyAndLogin', {
     method: 'POST'
   })
   .then(res => res.json())
@@ -123,7 +123,7 @@ export const verifyAndLogin = () => dispatch => {
 }
 
 export const logout = () => dispatch => {
-  fetch('/logout', {
+  fetch('/user/logout', {
     method: 'POST'
   })
   .then(() => {
