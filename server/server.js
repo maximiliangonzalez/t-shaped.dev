@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/topic', topicRouter);
-app.use('user', userRouter);
+app.use('/user', userRouter);
 
 app.use((err, req, res, next) => {
   res.status(400).json({msg: err})

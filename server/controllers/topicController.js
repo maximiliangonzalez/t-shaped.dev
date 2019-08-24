@@ -14,8 +14,9 @@ module.exports = {
   },
 
   addTopic(req, res, next) {
-    const {topicName, tags} = req.body;
-    Topic.create({name: topicName, tags}, (err, topic) => {
+    const { topic } = req.params;
+    const { tags } = req.body;
+    Topic.create({name: topic, tags}, (err, topic) => {
       if (err) {
         return next('err');
       }
@@ -28,7 +29,7 @@ module.exports = {
   },
 
   findTopic(req, res, next) {
-    Topic.findOne({_id: req.body.topic}, (err, topic) => {
+    Topic.findOne({_id: req.params.topic}, (err, topic) => {
       if (err) {
         return next(err);
       }
@@ -42,7 +43,7 @@ module.exports = {
 
   followTopic(req, res, next) {
     User.findOneAndUpdate(
-      {name: req.body.username},
+      {name: req.params.topic},
       {$push: {following: res.locals.topic}},
       {new: true, useFindAndModify: false},
       (err, user) => {
