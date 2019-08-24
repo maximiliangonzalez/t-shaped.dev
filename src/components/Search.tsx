@@ -10,7 +10,7 @@ const Search: React.FC = (): JSX.Element => {
   const search = () => {
     const term = searchTerm.current.value;
     if (term.trim() !== '') {
-      fetch(`topic/${term}`)
+      fetch(`/searchTopic/${term}`)
         .then(res => res.json())
         .then(data => {
           setSearchResults(data);
