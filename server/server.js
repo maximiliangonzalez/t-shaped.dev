@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const {signup, login, searchTopic, addTopic, followTopic, topicName, findTopic} = require('./controllers/userController');
 const {signToken, checkToken} = require('./controllers/tokenController');
+const topicRouter = require('./topicRouter');
 
 const app = express();
+
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -27,21 +29,7 @@ app.post('/logout', (req, res) => {
   res.clearCookie('token').send();
 });
 
-app.get('/searchTopic/:topic', searchTopic, (req, res) => {
-  res.status(200).json(res.locals.topics);
-});
-
-app.post('/addTopic', checkToken, addTopic, followTopic, (req, res) => {
-  res.status(200).json(res.locals.topic._id);
-});
-
-app.post('/followTopic', checkToken, findTopic, followTopic, (req, res) => {
-  res.status(200).json(res.locals.topic._id);
-});
-
-app.get('/topicName', topicName, (req, res) => {
-  res.status(200).json(res.locals.topic);
-});
+app.use('/topic', topicRouter);
 
 app.use((err, req, res, next) => {
   res.status(400).json({msg: err})
