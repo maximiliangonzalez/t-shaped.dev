@@ -14,6 +14,8 @@ module.exports = {
   },
 
   addTopic(req, res, next) {
+    if(res.locals.topics.length !== 0) return next('topic already exists');
+    
     const { topic } = req.params;
     const { tags } = req.body;
     Topic.create({name: topic, tags}, (err, topic) => {
