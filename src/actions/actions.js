@@ -40,9 +40,7 @@ export const followTopic = (topic, username) => dispatch => {
   })
   .then(res => res.json())
   .then(data => {
-    console.log('daighta', JSON.stringify(data))
     if (!data.hasOwnProperty('msg')) {
-      console.log('data but here', data);
       dispatch({
         type: types.ADD_TOPIC,
         payload: {_id: data}
