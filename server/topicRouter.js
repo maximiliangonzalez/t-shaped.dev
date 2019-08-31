@@ -10,7 +10,7 @@ router.get('/topicName/:topic', topicName, (req, res) => {
   res.status(200).json(res.locals.topic);
 });
 
-router.post('/:topic', checkToken, addTopic, followTopic, (req, res) => {
+router.post('/:topic', checkToken, searchTopic, addTopic, followTopic, (req, res) => {
   res.status(200).json(res.locals.topic._id);
 });
 
