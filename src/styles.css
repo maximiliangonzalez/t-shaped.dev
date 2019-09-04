@@ -1,0 +1,77 @@
+nav {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: rgb(48, 218, 48);
+  width: 100%;
+  height: 50px;
+  margin-bottom: 500px;
+}
+
+nav input, nav button {
+  height: 60%;
+}
+
+main {
+  margin-top: 60px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  list-style: none;
+  position: absolute;
+  right: 50px;
+}
+
+.dropdown-content li {
+  background: grey;
+  border: 1px solid black;
+  font-size: 25px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card{
+  height: 400px;
+  width: 400px;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 10%;
+  color: black;
+  box-shadow: 5px 5px 7px rgb(168, 166, 166);
+}
+
+.card-gray {
+  background: rgb(168, 166, 166);
+}
+
+.card-gray:hover {
+  background: rgb(180, 180, 180);
+}
+
+.card-green {
+  background: rgb(49, 179, 49);
+}
+
+.card-green:hover {
+  background: rgb(48, 218, 48);
+}
+
+.checkButton {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid black;
+  border-radius: 10%;
+}
+
+.checkButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
