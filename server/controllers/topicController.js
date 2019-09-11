@@ -55,7 +55,6 @@ module.exports = {
         if (!user) {
           return next('user not found');
         }
-        console.log('tawpic', res.locals.topic);
         return next();
     });
   },
