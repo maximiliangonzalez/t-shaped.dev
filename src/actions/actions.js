@@ -18,7 +18,9 @@ export const addTopic = (topicName, tags, username) => dispatch => {
   })
   .then(res => res.json())
   .then(data => {
+    console.log(data)
     if (!data.hasOwnProperty('msg')) {
+      console.log('dispatching')
       dispatch({
         type: types.ADD_TOPIC,
         payload: {_id: data}

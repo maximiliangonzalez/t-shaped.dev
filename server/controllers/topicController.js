@@ -5,10 +5,11 @@ module.exports = {
   searchTopic(req, res, next) {
     // finds topics starting with the request parameter
     Topic.find({name: new RegExp(`^${req.params.topic}`, 'i')}, (err, topic) => {
+      console.log(err, topic);
       if (err) {
         return next(err);
       }
-      res.locals.topics = topic? topic : [];
+      res.locals.topics === topic ? topic : [];
       return next();
     });
   },
